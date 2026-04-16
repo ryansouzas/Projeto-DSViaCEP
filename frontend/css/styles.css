@@ -37,3 +37,47 @@ html,body{
     font-size: 18px;
     cursor: pointer;
 }
+
+.form-container{
+    padding: 40px 20px;
+}
+
+.card-form{
+    background-color: #333;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.form-control{
+    margin-bottom: 20px;
+
+}
+
+.form-control label{
+    display: none;
+}
+
+.error-message{
+    color: #faa;
+    font-size: 10px;
+}
+
+.form-input{
+    height: 50px;
+    width: 100%;
+    border-radius: 4px;
+    padding: 0 20px;
+    font-size: 14px;
+    border: 0;
+}
+
+.form-input::placeholder{
+    color: #aaa;
+}
+
+.form-input:disabled{
+    background-color: #ddd;
+}
