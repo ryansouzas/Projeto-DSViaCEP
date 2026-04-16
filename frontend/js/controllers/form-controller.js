@@ -1,4 +1,5 @@
-import Address from "../models/address.js";
+import Address from '../models/address.js';
+import * as addressService from '../services/address-service.js';
 
 function State(){
 
@@ -31,9 +32,39 @@ export function init(){
     state.errorNumber = document.querySelector(".error-message[data-error='number']");
 
     state.inputNumber.addEventListener("change", handleInputNumberChange);
-    state.btnClear.addEventListener("click", handleBtnClick);
-    console.log(state);
+    state.btnClear.addEventListener("click", handleBtnClearClick);
+    state.btnSave.addEventListener("click", handleBtnSaveClick);
 
+
+    state.inputCep.addEventListener("change", handleInputCepChange);
+}
+
+async function handleInputCepChange(event){
+    const cep = event.target.value;
+    
+    try{
+        const address = await addressService.findByCep(cep);
+
+        state.inputStreet.value = address.street;
+        state.inputCity.value = address.city;
+        state.address = address;
+        
+        setFormError("cep", "");
+        state.inputNumber.focus();
+    }
+    catch(e){
+        state.inputStreet.value = "";
+        state.inputCity.value = "";
+        setFormError("cep", "Informe um cep válido");
+    }
+
+    console.log(address);
+
+}
+
+async function handleBtnSaveClick(event){
+    event.preventDefault();
+    console.log(event.target);
 }
 
 function handleInputNumberChange(event){
@@ -45,7 +76,7 @@ function handleInputNumberChange(event){
     }
 }
 
-function handleBtnClick(event){
+function handleBtnClearClick(event){
     event.preventDefault();
     clearForm();
     console.log("btn clicked");
