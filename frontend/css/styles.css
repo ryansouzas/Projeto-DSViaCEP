@@ -133,3 +133,14 @@ html,body{
     color: #ff8400;
     font-size: 18px;
 }
+
+.address-line{
+    font-size: 14px;
+    color : #fff;
+}
+
+.address-cep{
+    color: #8f8f8f;
+    font-size: 12px;
+}
+
