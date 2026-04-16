@@ -31,6 +31,7 @@ export function init(){
     state.errorNumber = document.querySelector(".error-message[data-error='number']");
 
     state.inputNumber.addEventListener("change", handleInputNumberChange);
+    state.btnClear.addEventListener("click", handleBtnClick);
     console.log(state);
 
 }
@@ -42,6 +43,22 @@ function handleInputNumberChange(event){
     else{
         setFormError("number", "");  
     }
+}
+
+function handleBtnClick(event){
+    event.preventDefault();
+    clearForm();
+    console.log("btn clicked");
+}
+
+function clearForm(){
+    state.inputCep.value = "";
+    state.inputStreet.value = "";
+    state.inputNumber.value = "";
+    state.inputCity.value = "";
+    setFormError("cep", "");
+    setFormError("number", "");
+    state.inputCep.focus();
 }
 
 function setFormError(field, message){
