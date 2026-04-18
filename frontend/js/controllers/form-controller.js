@@ -1,5 +1,6 @@
 import Address from '../models/address.js';
 import * as addressService from '../services/address-service.js';
+import * as listController from "./list-controller.js";
 
 function State(){
 
@@ -32,6 +33,7 @@ export function init(){
     state.errorNumber = document.querySelector(".error-message[data-error='number']");
 
     state.inputNumber.addEventListener("change", handleInputNumberChange);
+    state.inputNumber.addEventListener("keyup", handleInputNumberKeyup);
     state.btnClear.addEventListener("click", handleBtnClearClick);
     state.btnSave.addEventListener("click", handleBtnSaveClick);
 
@@ -39,12 +41,15 @@ export function init(){
     state.inputCep.addEventListener("change", handleInputCepChange);
 }
 
+function handleInputNumberKeyup(event){
+    state.address.number = event.target.value;
+}
+
 async function handleInputCepChange(event){
     const cep = event.target.value;
     
     try{
         const address = await addressService.findByCep(cep);
-
         state.inputStreet.value = address.street;
         state.inputCity.value = address.city;
         state.address = address;
@@ -58,13 +63,12 @@ async function handleInputCepChange(event){
         setFormError("cep", "Informe um cep válido");
     }
 
-    console.log(address);
 
 }
 
 async function handleBtnSaveClick(event){
     event.preventDefault();
-    console.log(event.target);
+    listController.addCard(state.address);
 }
 
 function handleInputNumberChange(event){
