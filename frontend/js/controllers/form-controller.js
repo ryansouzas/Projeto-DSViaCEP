@@ -66,7 +66,7 @@ async function handleInputCepChange(event){
 
 }
 
-async function handleBtnSaveClick(event){
+function handleBtnSaveClick(event){
     event.preventDefault();
 
     const errors = addressService.getErrors(state.address);
